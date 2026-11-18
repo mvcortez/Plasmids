@@ -109,7 +109,7 @@ def time_approx(s,xi,y_tot,eps):
     D=k_tr*xi
     V=V0*np.exp(mu*s)
     C=K*y_tot/(s0*6.022e2*n)
-    a_prime = (mu*n*D*C/V)*np.exp(-mu*s)*(1+C/V)**(-n-1)
+    a_prime = (mu*n*D*C/V)*(1+C/V)**(-n-1)
     a = D/(1+C/V)**n 
     return (-a+np.sqrt(a**2-2*a_prime*np.log(eps)))/a_prime
 
