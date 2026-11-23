@@ -1,5 +1,4 @@
-This is a repository of computer programs used in the simulations in the paper "Plasmid clustering slows mixing and
-drives a trade-off between growth and segregational stability"
+This is a repository of computer programs used in the simulations in the paper "Plasmid clustering slows redistribution driving a trade-off between growth and plasmid stability"
 
 1. main.py  - The main skeleton program for implementing the nonhomogeneous CTMC
 2. Lineage simulation and characterization: contains the program for the visualization of lineage simulations
