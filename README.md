@@ -14,9 +14,9 @@ drives a trade-off between growth and segregational stability"
           - Cross analysis of the effects of plasmid copy number and generation time to loss probability    
 
 Notes on Required Data:
-lineage_tau30.pkl - can be generated using the Lineage code
-replication.pkl - can be generated using the “effects of clustering on variance” code
-cluster.pkl - can be generated using main.py and renaming the output accordingly. Set the replication parameters to tau=30.  
+1. lineage_tau30.pkl - can be generated using the Lineage code
+2. replication.pkl - can be generated using the “effects of clustering on variance” code
+3. cluster.pkl - can be generated using main.py and renaming the output accordingly. Set the replication parameters to tau=30.  
 
       
 
