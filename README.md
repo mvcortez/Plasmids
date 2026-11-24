@@ -7,11 +7,11 @@ This is a repository of computer programs used in the simulations in the paper "
 5. Parameter fitting:
           - Clustering parameter: contains the programs for implementing the ABC algorithm for inferring the clustering parameters
           - Replication parameter: contains the programs for implementing the ABC algorithm for inferring the replication parameters
-6. Supplementary Simulations: contains programs for
-          - Comparing the Binomial and No-clustering models
-          - Determining the effects of clustering on population variance
-          - Effects of clustering on inheritance asymmetry
-          - Cross analysis of the effects of plasmid copy number and generation time to loss probability    
+6. Supplementary Simulations: contains additional programs and Jupyter notebooks for supplementary numerical experiments and analyses presented in the paper and Supplementary Information. These include:
+          - Comparisons of the binomial and no-clustering models
+          - Analyses of the effects of clustering on population variance and inheritance asymmetry
+          - Analyses of the combined effects of plasmid copy number and generation time on plasmid-loss probability
+          - Additional simulations and analyses exploring the effects of model parameters on plasmid inheritance, clustering, and plasmid stability  
 
 Notes on Required Data not uploaded in repository:
 1. lineage_tau30.pkl - can be generated using the Lineage code
