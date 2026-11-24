@@ -274,7 +274,7 @@ def lineage_sim(c,tau,beta,gamma,sigma,max_size):
             current_cell = daughter
             N+=1
         
-    return Line,length#,clust,ty
+    return Line#,length,clust,ty
 
 ##################################################
 # Hill-like exponent used in the volume-dependent replication expression.
@@ -312,9 +312,7 @@ for k in range(repeats):
     y0 = np.zeros(2*max_size)
     y0[0]=x0
     c= cell(0,y0,[],0,tau)   #index,clusters,parent,birth
-    Line,length = lineage_sim(c,tau,true_beta,true_gamm,true_sigma,max_size)
-    loss[k] = 1./length
-print('Loss prob',np.mean(loss))
+    Line = lineage_sim(c,tau,true_beta,true_gamm,true_sigma,max_size)
 end_time = time.perf_counter()
 elapsed_time = end_time - start_time
 print("Elapsed time: ", elapsed_time)
