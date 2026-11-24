@@ -16,7 +16,7 @@ This is a repository of computer programs used in the simulations in the paper "
 Notes on Required Data not uploaded in repository:
 1. lineage_tau30.pkl - can be generated using the Lineage code
 2. replication.pkl - can be generated using the “effects of clustering on variance” code
-3. cluster.pkl - can be generated using main.py and renaming the output accordingly. Set the replication parameters to tau=30.  
+3. cluster.pkl - can be generated using short_sims.py and renaming the output accordingly. Set the replication parameters to tau=30.  
 
       
 
