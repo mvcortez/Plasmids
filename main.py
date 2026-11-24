@@ -157,10 +157,10 @@ def ssa_vol(y0,x0,tau,beta,gamma,sigma,max_size):
         if y_tot1>0:
             dummy = y1[0]                                               
             y1[0] = 1
-            c_idx1 = np.where(y1>0)[0]                                  #indices of species with non-zero state except possibly free plasmids
+            c_idx1 = np.where(y1>0)[0]                            #indices of species with non-zero state except possibly free plasmids
             y1[0] = dummy
-            N1 = len(c_idx1)                                            #number of non-zero species
-            num_reax1 = N1+1+int(((N1-1)**2-N1+1)/2)+2*(N1-1)           #possible number of reactions given the system state 
+            N1 = len(c_idx1)                                      #number of non-zero species
+            num_reax1 = N1+1+int(((N1-1)**2-N1+1)/2)+2*(N1-1)     #possible number of reactions given the system state 
             a1,v1 = hazards(y1,c_idx1,num_reax1,N1,beta,gamma,sigma,max_size,t_y,y_tot1,y_tot)     
         else:
             num_reax1 = 1
@@ -257,8 +257,8 @@ def lineage_sim(c,tau,beta,gamma,sigma,max_size):
         current_cell.init_clusters = zz0
         
         Line.extend([current_cell])
-        #if len(Line)>20:
-        #    Line.remove(Line[0]) 
+        if len(Line)>20:
+            Line.remove(Line[0]) 
         
         if np.random.uniform(0,1)<0.5:
             daughter = cell(N+1,np.append(yy[:max_size],np.zeros(max_size)),current_cell.index,current_cell.t[-1],tau)
@@ -272,12 +272,9 @@ def lineage_sim(c,tau,beta,gamma,sigma,max_size):
             length+=1
             status = 1
             current_cell = daughter
-            #print(current_cell.init_clusters)
             N+=1
         
-        if len(Line)%50==0:
-            print(len(Line))
-    return Line#,length,clust,ty
+    return Line,length#,clust,ty
 
 ##################################################
 # Hill-like exponent used in the volume-dependent replication expression.
@@ -308,33 +305,31 @@ warnings.filterwarnings('ignore')
 repeats = 1
 loss = np.zeros(repeats)
 start_time = time.perf_counter()
+
 # Initialize the starting cell with x0 free plasmids at pole 1 and simulate
 # its lineage. The resulting cell objects are collected in Line.
 for k in range(repeats):
     y0 = np.zeros(2*max_size)
     y0[0]=x0
     c= cell(0,y0,[],0,tau)   #index,clusters,parent,birth
-    #Line,length,clust,ty = lineage_sim(c,tau,true_beta,true_gamm,true_sigma,max_size)
-    Line = lineage_sim(c,tau,true_beta,true_gamm,true_sigma,max_size)
-    #loss[k] = 1./length
-print('Loss prob',np.mean(loss),'err',np.std(loss))
+    Line,length = lineage_sim(c,tau,true_beta,true_gamm,true_sigma,max_size)
+    loss[k] = 1./length
+print('Loss prob',np.mean(loss))
 end_time = time.perf_counter()
 elapsed_time = end_time - start_time
 print("Elapsed time: ", elapsed_time)
-#np.savetxt("cluster_evolution.csv", clust, delimiter=",",header=" ")
-#np.savetxt("cluster_time.csv", ty, delimiter=",",header=" ")
-#np.savetxt(str(rho)+".csv", loss, delimiter=",",header=" ")
+
 
 # Save the simulated lineage objects to a pickle file named for tau.
-file_name = 'tau'+str(tau)+'.pkl'
-with open(file_name, 'wb') as file:
-    pickle.dump(Line, file)
+#file_name = 'tau'+str(tau)+'.pkl'
+#with open(file_name, 'wb') as file:
+#    pickle.dump(Line, file)
 
-# Summarize the final total-plasmid count recorded for each cell in Line.
-length = np.zeros(len(Line))
+# Summarize the final total-plasmid count recorded for the last 20 cells in Line.
+cp = np.zeros(len(Line))
 for i in range(len(Line)):
-    length[i] = Line[i].x[-1]
-    #print(length[i])
-print("mean",np.mean(length))
-print("CV",np.std(length)/np.mean(length))
+    cp[i] = Line[i].x[-1]
+    print(cp[i])
+print("mean",np.mean(cp))
+print("CV",np.std(cp)/np.mean(cp))
     
